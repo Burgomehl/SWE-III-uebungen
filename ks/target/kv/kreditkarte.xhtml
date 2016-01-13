@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link rel="stylesheet" href="resources/alleKunden.css" type="text/css" />
+	<title><ui:insert name="title">
+Kreditkarte
+ </ui:insert></title>
+</h:head>
+<h:body>
+	<div id="header">
+		<ui:insert name="header">
+			Kreditkarte anlegen/bearbeiten
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<h:form>
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				<h:panelGrid columns="2" headerClass="header" footerClass="footer">
+					<h:outputLabel value="Kunde:" />
+					<h:outputLabel
+						value="#{kundenHandler.merkeKunde.vorname} #{kundenHandler.merkeKunde.nachname} " />
+					<h:outputLabel value="Kartentyp:" for="typ" />
+					<h:panelGroup>
+						<h:selectOneMenu id="typ"
+							value="#{kundenHandler.merkeKreditkarte.typ}">
+							<f:selectItems var="form"
+								value="#{kundenHandler.kreditkartentypValues}"
+								itemValue="#{form}" itemLabel="#{form.label}" />
+						</h:selectOneMenu>
+					</h:panelGroup>
+					<h:outputLabel value="Kreditkartennummer:" for="nummer" />
+					<h:panelGroup>
+						<p:inputText id="nummer"
+							value="#{kundenHandler.merkeKreditkarte.nummer}" required="true"
+							requiredMessage="Kreditkartennummer fehlt">
+							<f:converter converterId="kreditkartenConverter" />
+							<f:validator validatorId="kreditkartenValidator" />
+						</p:inputText>
+						<h:message for="growl" styleClass="message" />
+					</h:panelGroup>
+					<h:outputLabel value="Gültig bis: (z.B. 10/15)" for="gueltig" />
+					<h:panelGroup>
+						<p:calendar id="gueltig"
+							value="#{kundenHandler.merkeKreditkarte.gueltigBis}" mode="popup"
+							navigation="true" showOn="button" pattern="MM/yy" />
+						<h:message for="growl" styleClass="message" />
+					</h:panelGroup>
+					<h:outputLabel value="Inhaber:" for="inhaber" />
+					<h:panelGroup>
+						<p:inputText id="inhaber"
+							value="#{kundenHandler.merkeKreditkarte.inhaber}" required="true"
+							requiredMessage="Inhaber fehlt" />
+						<h:message for="growl" styleClass="message" />
+					</h:panelGroup>
+				</h:panelGrid>
+				<h:commandButton action="#{kundenHandler.abbrechen()}"
+					value="Abbrechen" immediate="true" />
+				<h:commandButton action="#{kundenHandler.kreditkarteSpeichern()}"
+					value="Speichern" update="growl"/>
+			</h:form>
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+			Footer blabla
+		</ui:insert>
+	</div>
+</h:body>
+</html>

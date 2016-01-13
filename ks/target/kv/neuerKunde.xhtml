@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link rel="stylesheet" href="resources/alleKunden.css" type="text/css" />
+	<title><ui:insert name="title">
+Kunde anlegen
+ </ui:insert></title>
+</h:head>
+<h:body>
+	<div id="header">
+		<ui:insert name="header">
+			Header blabla
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<h:form>
+			<p:growl id="growl" showDetail="true" sticky="true" />  
+				<h:panelGrid columns="2"
+								headerClass="header" footerClass="footer">
+					<h:outputLabel value="Anrede:" for="anrede"/>
+					<h:panelGroup>
+						<h:selectOneMenu id="anrede" value="#{kundenHandler.merkeKunde.anrede}">
+							<f:selectItems var="form" value="#{kundenHandler.anredeValues}"
+								itemValue="#{form}" itemLabel="#{form.label}"/>
+						</h:selectOneMenu>	
+					</h:panelGroup>			
+					<h:outputLabel value="Vorname:" for="vorname"/>
+					<h:panelGroup>
+						<p:inputText id="vorname" value="#{kundenHandler.merkeKunde.vorname}" required="true" requiredMessage="Vorname fehlt"/>
+						<h:message for="growl" styleClass="message" />	
+					</h:panelGroup>
+					<h:outputLabel value="Nachname:" for="nachname"/>
+					<h:panelGroup>
+						<p:inputText id="nachname" value="#{kundenHandler.merkeKunde.nachname}" required="true" requiredMessage="Nachname fehlt"/>
+						<h:message for="growl" styleClass="message" />
+					</h:panelGroup>
+					<h:outputLabel value="Geburtsdatum:" for="geburtsdatum"/>
+					<h:panelGroup>
+						<p:calendar id ="geburtsdatum" value="#{kundenHandler.merkeKunde.geburtsdatum}"
+						mode="popup" navigator="true" showOn="button" pattern="dd.MM.yyyy" />	
+						<h:message for="growl" styleClass="message" />
+					</h:panelGroup>
+				</h:panelGrid>
+				<h:commandButton action="#{kundenHandler.speichern()}" value="Speichern" update="growl"/>
+			</h:form>
+
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+			Footer blabla
+		</ui:insert>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,12 @@
+de\hsb\app\kv\controller\KreditkartenValidator.class
+de\hsb\app\kv\model\Anschrift.class
+de\hsb\app\kv\model\Kreditkarte_.class
+de\hsb\app\kv\model\Anrede.class
+de\hsb\app\kv\converter\LocalDateConverter.class
+de\hsb\app\kv\controller\KundenHandler.class
+de\hsb\app\kv\model\Kreditkartentyp.class
+de\hsb\app\kv\model\Anschrift_.class
+de\hsb\app\kv\controller\KreditkartenConverter.class
+de\hsb\app\kv\model\Kunde.class
+de\hsb\app\kv\model\Kunde_.class
+de\hsb\app\kv\model\Kreditkarte.class
